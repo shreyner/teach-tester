@@ -1,1 +1,60 @@
-<h1>{{home.title}}</h1>
+<div class="row">
+  <div class="col-md-12 text-center">
+
+    <section ng-if="home.UserHistory.userData.false == false">
+      <h1 class="page-header">{{home.title}}</h1>
+
+      <div class="form-horizontal col-md-5 col-md-offset-3" role="form">
+        <div class="form-group">
+          <label for="inputName3" class="col-sm-3 control-label">Имя</label>
+          <div class="col-sm-9">
+            <input type="text" ng-model="home.mainForm.name" class="form-control" placeholder="Владимир">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputName3" class="col-sm-3 control-label">Пол</label>
+          <div class="col-sm-9 text-left">
+            <div class="radio">
+              <label><input type="radio" ng-model="home.mainForm.female" value="man">Мужской</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" ng-model="home.mainForm.female" value="woman">Женский</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-default" ng-click="home.setDataForm()">Начать тест</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section ng-if="home.UserHistory.userData.false !== false && home.UserHistory.count < home.listQuestions.length">
+      <div ng-repeat="question in home.listQuestions" ng-show="$index == home.UserHistory.count">
+        <span class="text-left">{{$index + 1}}/{{home.listQuestions.length}}</span>
+        <br>
+        <img ng-src="{{question.img}}" alt="" />
+        <br>
+        <label>Вопрос:</label>
+        <p>{{question.question}}</p>
+
+        <div class="form-group">
+          <div class="radio" ng-repeat="answer in question.answer">
+            <label><input type="radio" ng-model="home.idAnswer" ng-value="answer.id">{{answer.message}}</label>
+          </div>
+        </div>
+        <button class="btn btn-default" ng-click="home.CheckAnswer(home.idAnswer,$index)">Отправить</button>
+
+      </div>
+    </section>
+
+    <section ng-if="home.UserHistory.count >= home.listQuestions.length">
+      <h1 class="page-header">Ваш результат, {{home.UserHistory.userData.name}}</h1>
+      <h3 ng-bind="home.result()"></h3><h3>Балов {{home.UserHistory.CorrectAnswers}}/70</h3>
+      <button class="btn btn-default" ng-click="home.repeat()">Повторить</button>
+      <button class="btn btn-default" ng-click="home.reset()">Reset</button>
+    </section>
+  </div>
+</div>

@@ -4,8 +4,8 @@ import uiRouter from 'angular-ui-router';
 import Config from './app.config.js'
 import Components from './components';
 
-import './app.sass';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './app.sass';
 
 
 angular
