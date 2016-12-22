@@ -9,7 +9,7 @@ import './app.sass';
 
 
 angular
-  .module('tester',[
+  .module('testbennett',[
     uiRouter,
     Components.name
   ])
